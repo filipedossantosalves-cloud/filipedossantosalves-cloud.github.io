@@ -472,7 +472,25 @@ section[id] { scroll-margin-top: 104px; }
   .cta-section h2 { font-size: clamp(36px, 11vw, 44px); }
 }
 
-  </style>
+
+/* Proteção contra rolagem horizontal em telas pequenas */
+html, body { max-width: 100%; overflow-x: hidden; }
+@supports (overflow: clip) {
+  html, body { overflow-x: clip; }
+}
+@media (max-width: 720px) {
+  .hero, .hero-visual { overflow: hidden; }
+  .hero-stats {
+    display: grid;
+    grid-template-columns: repeat(3, minmax(0, 1fr));
+    width: 100%;
+    overflow: visible;
+  }
+  .hero-stats div {
+    min-width: 0;
+    padding-inline: 8px;
+  }
+}  </style>
 </head>
 <body>
   <div class="scroll-progress" aria-hidden="true"><span></span></div>
