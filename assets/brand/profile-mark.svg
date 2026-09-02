@@ -1,0 +1,8 @@
+<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 1080 1080" role="img" aria-labelledby="title desc">
+  <title id="title">FWS</title>
+  <desc id="desc">Marca quadrada da Filipe Web Studio</desc>
+  <rect width="1080" height="1080" rx="230" fill="#090b12"/>
+  <circle cx="540" cy="500" r="345" fill="#9cff57"/>
+  <text x="540" y="585" text-anchor="middle" font-family="Arial, sans-serif" font-size="250" font-weight="900" letter-spacing="-18" fill="#081006">FWS</text>
+  <text x="540" y="940" text-anchor="middle" font-family="Arial, sans-serif" font-size="56" font-weight="800" letter-spacing="8" fill="#f4f6fb">FILIPE WEB STUDIO</text>
+</svg>

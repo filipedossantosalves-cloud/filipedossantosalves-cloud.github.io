@@ -1,0 +1,16 @@
+{
+  "name": "Filipe Web Studio",
+  "short_name": "FWS",
+  "start_url": "/",
+  "display": "standalone",
+  "background_color": "#090b12",
+  "theme_color": "#090b12",
+  "icons": [
+    {
+      "src": "assets/brand/profile-mark.svg",
+      "sizes": "any",
+      "type": "image/svg+xml",
+      "purpose": "any"
+    }
+  ]
+}
