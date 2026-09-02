@@ -1,0 +1,4 @@
+User-agent: *
+Allow: /
+
+Sitemap: https://filipedossantosalves-cloud.github.io/sitemap.xml
