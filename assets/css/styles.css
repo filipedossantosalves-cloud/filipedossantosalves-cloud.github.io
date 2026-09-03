@@ -79,7 +79,8 @@ img { display: block; max-width: 100%; }
 }
 .site-header.scrolled { top: 10px; background: rgba(9,11,18,.9); border-color: rgba(255,255,255,.16); }
 .brand { display: inline-flex; align-items: center; gap: 12px; width: max-content; }
-.brand-logo { width: 174px; height: 40px; object-fit: contain; object-position: left center; }
+.brand-logo { width: 50px; height: 50px; border-radius: 12px; object-fit: cover; object-position: center; }
+.footer-logo { width: 74px; height: 74px; border-radius: 16px; }
 .brand-mark { width: 42px; height: 36px; display: grid; place-items: center; color: #081006; background: var(--accent); border-radius: 10px; font-size: 11px; font-weight: 900; letter-spacing: -.04em; }
 .brand-text { display: flex; flex-direction: column; font-size: 14px; line-height: 1.05; font-weight: 750; }
 .brand-text small { color: var(--muted); font-size: 10px; letter-spacing: .18em; text-transform: uppercase; margin-top: 4px; }
