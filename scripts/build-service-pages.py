@@ -163,6 +163,7 @@ footer = footer.replace('src="assets/', 'src="../assets/')
     # The footer's "top" link stays on the current page; brand links return home.
 footer = footer.replace('class="back-top" href="../#inicio"','class="back-top" href="#inicio"')
 footer = footer.replace('class="quick-top" href="../#inicio"','class="quick-top" href="#inicio"')
+footer = footer.replace('<nav class="quick-navigation" aria-label="Navegação rápida"><a class="quick-top"', '<nav class="quick-navigation" aria-label="Navegação rápida"><a class="quick-home" href="../#inicio" target="_blank" rel="noopener noreferrer">Página inicial</a><a class="quick-top"')
 home_graph = json.loads(re.search(r'<script type="application/ld\+json">\s*(.*?)\s*</script>', HOME, re.S).group(1))['@graph']
 
 for data in SERVICES:
