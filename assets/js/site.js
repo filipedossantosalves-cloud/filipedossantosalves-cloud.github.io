@@ -92,7 +92,6 @@
       const quickTop = document.querySelector('.quick-top');
       if (quickTop) {
         const updateQuickTop = () => quickTop.classList.toggle('is-visible', window.scrollY > 240);
-        updateQuickTop();
         window.addEventListener('scroll', updateQuickTop, { passive: true });
       }
     })();
