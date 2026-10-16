@@ -222,6 +222,7 @@
     .quick-navigation a { min-height: 40px; display: inline-flex; align-items: center; justify-content: center; gap: 7px; padding: 8px 12px; color: var(--luz); background: rgba(13,35,30,.96); border: 1px solid var(--line); border-radius: 4px; box-shadow: var(--shadow); font: 600 9px/1.2 'Montserrat',Arial,sans-serif; letter-spacing: .08em; text-transform: uppercase; transition: transform .25s,border-color .25s; }
     .quick-navigation a:hover { transform: translateY(-2px); border-color: var(--ouro); }
     .quick-navigation .icon { width: 13px; height: 13px; }
+    .keep-together { white-space: nowrap; }
     .quick-navigation .quick-home { position: fixed; left: 18px; bottom: 18px; }
     .quick-navigation .quick-top { position: fixed; right: 18px; bottom: 18px; visibility: hidden; pointer-events: none; opacity: 0; transform: translateY(6px); transition: opacity .25s,transform .25s,visibility 0s linear .25s; }
     .quick-navigation .quick-top.is-visible { visibility: visible; pointer-events: auto; opacity: 1; transform: translateY(0); transition-delay: 0s; }
