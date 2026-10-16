@@ -1,16 +1,17 @@
 {
-  "name": "Filipe Web Studio",
-  "short_name": "FWS",
+  "name": "Viena Studio — Design & Presença Digital",
+  "short_name": "Viena Studio",
   "start_url": "/",
+  "scope": "/",
   "display": "standalone",
-  "background_color": "#090b12",
-  "theme_color": "#090b12",
+  "background_color": "#0D231E",
+  "theme_color": "#0D231E",
   "icons": [
     {
-      "src": "assets/brand/filipe-web-studio-icon.png",
-      "sizes": "512x512",
-      "type": "image/png",
-      "purpose": "any maskable"
+      "src": "assets/favicon.svg",
+      "sizes": "any",
+      "type": "image/svg+xml",
+      "purpose": "any"
     }
   ]
 }
