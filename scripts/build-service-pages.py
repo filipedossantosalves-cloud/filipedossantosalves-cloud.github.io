@@ -162,6 +162,7 @@ footer = shared_links(HOME[HOME.index('  <footer class="site-footer">'):])
 footer = footer.replace('src="assets/', 'src="../assets/')
     # The footer's "top" link stays on the current page; brand links return home.
 footer = footer.replace('class="back-top" href="../#inicio"','class="back-top" href="#inicio"')
+footer = footer.replace('class="quick-top" href="../#inicio"','class="quick-top" href="#inicio"')
 home_graph = json.loads(re.search(r'<script type="application/ld\+json">\s*(.*?)\s*</script>', HOME, re.S).group(1))['@graph']
 
 for data in SERVICES:
