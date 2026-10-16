@@ -88,6 +88,13 @@
         document.querySelectorAll('main section[id]').forEach(section => observer.observe(section));
       }
       document.getElementById('year').textContent = new Date().getFullYear();
+
+      const quickTop = document.querySelector('.quick-top');
+      if (quickTop) {
+        const updateQuickTop = () => quickTop.classList.toggle('is-visible', window.scrollY > 240);
+        updateQuickTop();
+        window.addEventListener('scroll', updateQuickTop, { passive: true });
+      }
     })();
 
     /* One-time entrances; no animation library, scroll hijacking or hidden-content fallback. */
