@@ -1,0 +1,13 @@
+Viena Studio — publicação no GitHub Pages
+
+1. Extraia este ZIP.
+2. Abra o repositório filipedossantosalves-cloud/filipedossantosalves-cloud.github.io.
+3. Use a branch codex/viena-studio-publicacao, já criada.
+4. Add file → Upload files: arraste os arquivos E pastas extraídos, mantendo os caminhos. Não envie o próprio ZIP como se fosse o site.
+5. Salve as alterações na branch.
+6. Abra um pull request para main, confira os arquivos e faça o merge.
+7. Aguarde o workflow de GitHub Pages concluir com sucesso.
+8. Site: https://filipedossantosalves-cloud.github.io/
+
+A branch atual contém só parte da atualização. Não faça merge antes de enviar o pacote completo.
+O pacote inclui as seis páginas, todas as imagens, fontes locais, scripts de desenvolvimento, robots.txt e sitemap.xml, com os endereços ajustados para o GitHub Pages.

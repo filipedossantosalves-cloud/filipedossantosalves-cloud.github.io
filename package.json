@@ -1,0 +1,11 @@
+{
+  "name": "viena-studio",
+  "private": true,
+  "version": "1.0.0",
+  "scripts": {
+    "build": "python scripts/build-service-pages.py && node scripts/build-styles.cjs && python scripts/validate-site.py"
+  },
+  "devDependencies": {
+    "tailwindcss": "3.4.17"
+  }
+}
