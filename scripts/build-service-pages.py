@@ -22,7 +22,7 @@ def testimonial_html(prefix=''):
     project_url = '#projeto' if prefix else 'projeto-giftz-3d-studio/'
     return f'''<figure class="testimonial">
       <figcaption class="testimonial-context"><p class="eyebrow label">Nas palavras do cliente</p><p class="testimonial-company">{escape(t['company'])}</p><p class="testimonial-meta"><strong>{escape(t['attribution'])}</strong><span>Trecho de mensagem pelo {escape(t['channel'])}<br><time datetime="{t['date']}">{escape(t['dateLabel'])}</time></span></p><a class="text-link" href="{project_url}">Conhecer o projeto <span aria-hidden="true">↗</span></a></figcaption>
-      <div class="testimonial-content"><span class="testimonial-mark" aria-hidden="true">“</span><blockquote cite="{image}"><p>“{escape(t['quote'])}”</p></blockquote><a class="text-link testimonial-evidence" href="{image}" target="_blank" rel="noopener noreferrer">Ver mensagem original <span aria-hidden="true">↗</span></a></div>
+      <div class="testimonial-content"><span class="testimonial-mark" aria-hidden="true">“</span><blockquote cite="{image}"><p>“{escape(t['quote'])}”</p></blockquote></div>
     </figure>'''
 
 HOME = re.sub(r'<!-- testimonial:giftz:start -->.*?<!-- testimonial:giftz:end -->', lambda m:'<!-- testimonial:giftz:start -->\n'+testimonial_html()+'\n        <!-- testimonial:giftz:end -->', HOME, flags=re.S)
