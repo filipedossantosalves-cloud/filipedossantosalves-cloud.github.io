@@ -8,7 +8,9 @@
       const menuButton = document.getElementById('menu-toggle');
       const mobileNav = document.getElementById('mobile-navigation');
       const menuSymbol = document.getElementById('menu-symbol');
+      const menuIsClosed = () => !mobileNav || mobileNav.hidden;
 
+      if (menuButton && mobileNav && menuSymbol) {
       function closeMenu(returnFocus = false) {
         mobileNav.hidden = true;
         menuButton.setAttribute('aria-expanded', 'false');
@@ -36,6 +38,7 @@
       });
       const desktopQuery = window.matchMedia('(min-width: 1100px)');
       desktopQuery.addEventListener('change', event => { if (event.matches) closeMenu(); });
+      }
 
       document.querySelectorAll('[data-preview-toggle]').forEach(button => {
         button.addEventListener('click', () => {
@@ -67,14 +70,15 @@
         }, { rootMargin: '-18% 0px -55% 0px', threshold: 0 });
         document.querySelectorAll('main section[id]').forEach(section => observer.observe(section));
       }
-      document.getElementById('year').textContent = new Date().getFullYear();
+      const year = document.getElementById('year');
+      if (year) year.textContent = new Date().getFullYear();
 
       const siteHeader = document.querySelector('.site-header');
       let previousScrollY = window.scrollY;
       const updateHeaderVisibility = () => {
         const currentScrollY = window.scrollY;
         const scrollingDown = currentScrollY > previousScrollY;
-        siteHeader.classList.toggle('is-hidden', scrollingDown && currentScrollY > 96 && mobileNav.hidden);
+        siteHeader.classList.toggle('is-hidden', scrollingDown && currentScrollY > 96 && menuIsClosed());
         previousScrollY = currentScrollY;
       };
       window.addEventListener('scroll', updateHeaderVisibility, { passive: true });

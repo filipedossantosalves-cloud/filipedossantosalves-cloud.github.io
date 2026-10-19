@@ -151,6 +151,7 @@ def contact(data, label=None):
 
 def shared_links(html):
     html = re.sub(r'(<a\b[^>]*?href=")#([^\"]*)"', r'\1../#\2"', html)
+    html = html.replace('href="portfolio/"', 'href="../portfolio/"')
     for data in SERVICES:
         html = html.replace(f'href="{data["path"]}/"', f'href="../{data["path"]}/"')
     return html
@@ -158,12 +159,12 @@ def shared_links(html):
 head = HOME[:HOME.index('</head>')]
 symbols_and_header = HOME[HOME.index('<body>'):HOME.index('  <main id="conteudo"')]
 symbols_and_header = shared_links(symbols_and_header).replace('href="../#conteudo"','href="#conteudo"')
+symbols_and_header = symbols_and_header.replace('      <a href="https://wa.me/', '      <a class="button button-secondary header-home" href="../#inicio">Página inicial</a>\n      <a href="https://wa.me/', 1)
 footer = shared_links(HOME[HOME.index('  <footer class="site-footer">'):])
 footer = footer.replace('src="assets/', 'src="../assets/')
     # The footer's "top" link stays on the current page; brand links return home.
 footer = footer.replace('class="back-top" href="../#inicio"','class="back-top" href="#inicio"')
 footer = footer.replace('class="quick-top" href="../#inicio"','class="quick-top" href="#inicio"')
-footer = footer.replace('<nav class="quick-navigation" aria-label="Navegação rápida"><a class="quick-top"', '<nav class="quick-navigation" aria-label="Navegação rápida"><a class="quick-home" href="../#inicio">Página inicial</a><a class="quick-top"')
 home_graph = json.loads(re.search(r'<script type="application/ld\+json">\s*(.*?)\s*</script>', HOME, re.S).group(1))['@graph']
 
 for data in SERVICES:
@@ -285,7 +286,7 @@ ll_main=f'''
 '''
 (DIST/ll_path).mkdir(exist_ok=True)
 (DIST/ll_path/'index.html').write_text(ll_head+'</head>\n'+symbols_and_header+ll_main+footer, encoding='utf-8')
-urls = [BASE] + [BASE+s['path']+'/' for s in SERVICES] + [case_url,ll_url]
+urls = [BASE, BASE+'portfolio/'] + [BASE+s['path']+'/' for s in SERVICES] + [case_url,ll_url]
 (DIST/'sitemap.xml').write_text('<?xml version="1.0" encoding="UTF-8"?>\n<urlset xmlns="http://www.sitemaps.org/schemas/sitemap/0.9">\n'+''.join(f'  <url><loc>{url}</loc><lastmod>2026-10-15</lastmod></url>\n' for url in urls)+'</urlset>\n', encoding='utf-8')
 (DIST/'robots.txt').write_text('User-agent: *\nAllow: /\n\nSitemap: '+BASE+'sitemap.xml\n', encoding='utf-8')
 print(f'Generated {len(SERVICES)} service pages, Giftz and LL Para-brisas projects, robots.txt and sitemap.')
