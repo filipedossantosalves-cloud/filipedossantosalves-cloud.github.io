@@ -46,6 +46,7 @@ for path,page in pages.items():
     graph_ids=[item['@id'] for item in schema['@graph']]
     assert len(graph_ids)==len(set(graph_ids))
     assert any(item['@type']=='WebPage' and item['url']==canonical for item in schema['@graph'])
+    assert 'href="../#portfolio"' not in page.source, (path, 'portfolio must link to its dedicated page')
     for tag,attrs in page.elements:
         if tag=='script' and attrs.get('src'):
             assert not urlsplit(attrs['src']).scheme,(path,'third-party runtime')
