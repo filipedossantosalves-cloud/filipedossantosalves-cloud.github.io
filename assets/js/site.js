@@ -8,8 +8,6 @@
       const menuButton = document.getElementById('menu-toggle');
       const mobileNav = document.getElementById('mobile-navigation');
       const menuSymbol = document.getElementById('menu-symbol');
-      const dialog = document.getElementById('contact-dialog');
-      let lastContactTrigger = null;
 
       function closeMenu(returnFocus = false) {
         mobileNav.hidden = true;
@@ -39,7 +37,6 @@
       const desktopQuery = window.matchMedia('(min-width: 1100px)');
       desktopQuery.addEventListener('change', event => { if (event.matches) closeMenu(); });
 
-      const validPhone = /^\d{10,15}$/.test(VIENA_CONFIG.whatsappNumber);
       document.querySelectorAll('[data-preview-toggle]').forEach(button => {
         button.addEventListener('click', () => {
           const card = button.closest('.portfolio-card');
@@ -49,30 +46,13 @@
         });
       });
       document.querySelectorAll('[data-whatsapp]').forEach(link => {
-        if (validPhone) {
-          const message = link.dataset.service
-            ? `Olá! Quero conversar com a Viena Studio sobre ${link.dataset.service}.`
-            : VIENA_CONFIG.whatsappMessage;
-          link.href = `https://wa.me/${VIENA_CONFIG.whatsappNumber}?text=${encodeURIComponent(message)}`;
-          link.target = '_blank';
-          link.rel = 'noopener noreferrer';
-        } else {
-          link.setAttribute('aria-haspopup', 'dialog');
-          link.addEventListener('click', event => {
-            event.preventDefault();
-            lastContactTrigger = link;
-            closeMenu();
-            if (typeof dialog.showModal === 'function') dialog.showModal();
-            else window.alert(document.getElementById('dialog-description').textContent);
-          });
-        }
+        const message = link.dataset.service
+          ? `Olá! Quero conversar com a Viena Studio sobre ${link.dataset.service}.`
+          : VIENA_CONFIG.whatsappMessage;
+        link.href = `https://wa.me/${VIENA_CONFIG.whatsappNumber}?text=${encodeURIComponent(message)}`;
+        link.target = '_blank';
+        link.rel = 'noopener noreferrer';
       });
-      dialog.addEventListener('click', event => {
-        if (event.target !== dialog) return;
-        const bounds = dialog.getBoundingClientRect();
-        if (event.clientX < bounds.left || event.clientX > bounds.right || event.clientY < bounds.top || event.clientY > bounds.bottom) dialog.close();
-      });
-      dialog.addEventListener('close', () => { if (lastContactTrigger) lastContactTrigger.focus(); });
 
       if ('IntersectionObserver' in window) {
         const links = Array.from(document.querySelectorAll('.desktop-nav .nav-link'));
@@ -88,6 +68,16 @@
         document.querySelectorAll('main section[id]').forEach(section => observer.observe(section));
       }
       document.getElementById('year').textContent = new Date().getFullYear();
+
+      const siteHeader = document.querySelector('.site-header');
+      let previousScrollY = window.scrollY;
+      const updateHeaderVisibility = () => {
+        const currentScrollY = window.scrollY;
+        const scrollingDown = currentScrollY > previousScrollY;
+        siteHeader.classList.toggle('is-hidden', scrollingDown && currentScrollY > 96 && mobileNav.hidden);
+        previousScrollY = currentScrollY;
+      };
+      window.addEventListener('scroll', updateHeaderVisibility, { passive: true });
 
       const quickTop = document.querySelector('.quick-top');
       if (quickTop) {
