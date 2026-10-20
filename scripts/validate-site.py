@@ -31,6 +31,7 @@ class Page(HTMLParser):
 pages={path:Page(path) for path in [DIST/'index.html',*DIST.glob('*/index.html')]}
 canonicals=set(); descriptions=set(); titles=set(); whatsapp=0; faq=0
 for path,page in pages.items():
+    assert not any(glyph in page.source for glyph in ('↗','↘','↑','↓')), (path, 'use SVG icons instead of text-arrow characters')
     assert len(page.ids)==len(set(page.ids)),(path,'duplicate IDs')
     assert len(page.select('h1'))==1,(path,'H1')
     assert page.select('html')[0]['lang']=='pt-BR'

@@ -16,13 +16,16 @@ PHONE = '558192788355'
 HOME = (DIST / 'index.html').read_text(encoding='utf-8')
 TESTIMONIAL = json.loads((ROOT / 'content/giftz-testimonial.json').read_text(encoding='utf-8'))
 
+def icon(name='arrow-up-right'):
+    return f'<svg class="icon" aria-hidden="true"><use href="#{name}"/></svg>'
+
 def testimonial_html(prefix='', hidden=False):
     t = TESTIMONIAL
     image = prefix + t['sourceImage']
     project_url = '#projeto' if prefix else 'projeto-giftz-3d-studio/'
     hidden_attr = ' hidden' if hidden else ''
     return f'''<figure class="testimonial"{hidden_attr}>
-      <figcaption class="testimonial-context"><p class="eyebrow label">Nas palavras do cliente</p><p class="testimonial-company">{escape(t['company'])}</p><p class="testimonial-meta"><strong>{escape(t['attribution'])}</strong><span>Trecho de mensagem pelo {escape(t['channel'])}<br><time datetime="{t['date']}">{escape(t['dateLabel'])}</time></span></p><a class="text-link" href="{project_url}">Conhecer o projeto <span aria-hidden="true">↗</span></a></figcaption>
+      <figcaption class="testimonial-context"><p class="eyebrow label">Nas palavras do cliente</p><p class="testimonial-company">{escape(t['company'])}</p><p class="testimonial-meta"><strong>{escape(t['attribution'])}</strong><span>Trecho de mensagem pelo {escape(t['channel'])}<br><time datetime="{t['date']}">{escape(t['dateLabel'])}</time></span></p><a class="text-link" href="{project_url}">Conhecer o projeto {icon()}</a></figcaption>
       <div class="testimonial-content"><span class="testimonial-mark" aria-hidden="true">“</span><blockquote cite="{image}"><p>“{escape(t['quote'])}”</p></blockquote></div>
     </figure>'''
 
@@ -143,9 +146,6 @@ SERVICES = [
     },
 ]
 
-def icon(name='arrow-up-right'):
-    return f'<svg class="icon" aria-hidden="true"><use href="#{name}"/></svg>'
-
 def contact(data, label=None):
     message = 'Olá! Quero conversar com a Viena Studio sobre ' + data['message'] + '.'
     return f'<a class="button button-primary" href="https://wa.me/{PHONE}?text={quote(message)}" data-whatsapp data-service="{escape(data["message"],quote=True)}">{icon("whatsapp")}{escape(label or data["cta"])}{icon()}</a>'
@@ -230,6 +230,8 @@ case_main='''
     <section class="contact-section" id="contato" aria-labelledby="contact-title"><div class="shell"><div class="contact-frame"><svg class="contact-mark" aria-hidden="true"><use href="#viena-mark"/></svg><p class="label">Seu projeto, com sua identidade</p><h2 class="display contact-title" id="contact-title">Como sua empresa pode<br><span class="gold">se apresentar melhor?</span></h2><p class="contact-copy">Conte o que você oferece e o que seu cliente precisa entender antes de pedir um orçamento. Vamos organizar esse caminho.</p><a class="button button-primary" href="https://wa.me/558192788355?text=Ol%C3%A1!%20Vi%20o%20projeto%20Giftz%20e%20quero%20um%20site%20para%20minha%20empresa." data-whatsapp data-service="um site para minha empresa, com referência no projeto Giftz">Conversar sobre meu site <span aria-hidden="true">↗</span></a><p class="contact-caption">Atendimento direto com Filipe · Recife–PE e online</p></div><nav class="service-related" aria-label="Soluções relacionadas"><a class="text-link" href="../criacao-de-sites-recife/">Site de uma página por R$ 997 <span aria-hidden="true">↗</span></a><a class="text-link" href="../sites-institucionais/">Sites institucionais <span aria-hidden="true">↗</span></a></nav></div></section>
   </main>
 '''
+case_main = case_main.replace('<span aria-hidden="true">↗</span>', icon())
+case_main = case_main.replace('<span aria-hidden="true">↓</span>', icon('arrow-down'))
 case_main = case_main.replace('    <section class="contact-section"', '<div class="shell case-feedback" id="depoimento">'+testimonial_html('../')+'</div>\n    <section class="contact-section"',1)
 (DIST/case_path).mkdir(exist_ok=True)
 (DIST/case_path/'index.html').write_text(case_head+'</head>\n'+symbols_and_header+case_main+footer, encoding='utf-8')
