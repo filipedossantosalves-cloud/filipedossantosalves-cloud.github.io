@@ -1,0 +1,11 @@
+/* Contraste reforçado nas seções claras, preservando a paleta dourada da marca. */
+.quick-start .eyebrow,
+.method-section .eyebrow,
+.difference .eyebrow { color: #705115; }
+.quick-start .eyebrow::before,
+.method-section .eyebrow::before,
+.difference .eyebrow::before { background: #705115; }
+.quick-start .gold { color: #705115; }
+.quick-start-card b { color: #785714; }
+.method-section .step-number { color: #705115; }
+.difference .bento-index { color: #705115; opacity: 1; }
