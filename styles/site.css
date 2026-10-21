@@ -334,6 +334,7 @@
     .quick-start-card { display: grid; gap: 9px; min-height: 190px; padding: 22px; border: 1px solid rgba(13,35,30,.2); border-radius: 6px; background: rgba(255,255,255,.5); transition: border-color .3s,transform .3s,box-shadow .3s; }
     .quick-start-card:hover, .quick-start-card:focus-visible { border-color: var(--ouro); box-shadow: 0 15px 35px -18px rgba(13,35,30,.45); }
     .quick-start-card > span:not(.label) { color: #496057; font-size: 13px; line-height: 1.65; }
+    .quick-start-terms { display: block; color: #496057; font-size: 11px; line-height: 1.55; }
     .quick-start-card strong { font: 500 26px/1.16 'Cinzel',Georgia,serif; color: var(--imperial); }
     .quick-start-card strong small { font: 500 13px/1 'Montserrat',Arial,sans-serif; color: var(--ouro); }
     .quick-start-card b { align-self: end; color: #967330; font: 600 10px/1.4 'Montserrat',Arial,sans-serif; letter-spacing: .1em; text-transform: uppercase; }
