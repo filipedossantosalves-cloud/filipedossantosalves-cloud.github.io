@@ -168,6 +168,10 @@ footer = footer.replace('class="back-top" href="../#inicio"','class="back-top" h
 footer = footer.replace('class="quick-top" href="../#inicio"','class="quick-top" href="#inicio"')
 home_graph = json.loads(re.search(r'<script type="application/ld\+json">\s*(.*?)\s*</script>', HOME, re.S).group(1))['@graph']
 
+def has_schema_type(item, schema_type):
+    value = item.get('@type', '')
+    return schema_type in value if isinstance(value, list) else value == schema_type
+
 for data in SERVICES:
     canonical = BASE + data['path'] + '/'
     page_head = re.sub(r'<title>.*?</title>', f'<title>{escape(data["title"])}</title>', head)
@@ -177,7 +181,7 @@ for data in SERVICES:
         page_head = re.sub(r'(<meta property="'+re.escape(name)+r'" content=")[^"]*(">)',lambda m:m[1]+escape(value,quote=True)+m[2],page_head)
     page_head = re.sub(r'<link rel="canonical" href="[^"]+">',f'<link rel="canonical" href="{canonical}">',page_head)
     page_head = page_head.replace('href="assets/', 'href="../assets/')
-    graph = [item for item in home_graph if item['@type'] in ('Organization','WebSite','Person') or item['@id']==BASE+'#service-'+data['key']]
+    graph = [item for item in home_graph if any(has_schema_type(item, kind) for kind in ('Organization','WebSite','Person')) or item['@id']==BASE+'#service-'+data['key']]
     graph.extend([
         {'@type':'WebPage','@id':canonical+'#webpage','url':canonical,'name':data['title'],'description':data['description'],'inLanguage':'pt-BR','isPartOf':{'@id':BASE+'#website'},'mainEntity':{'@id':BASE+'#service-'+data['key']},'breadcrumb':{'@id':canonical+'#breadcrumb'}},
         {'@type':'BreadcrumbList','@id':canonical+'#breadcrumb','itemListElement':[{'@type':'ListItem','position':1,'name':'Viena Studio','item':BASE},{'@type':'ListItem','position':2,'name':data['name'],'item':canonical}]},
@@ -216,7 +220,7 @@ case_head = re.sub(r'<title>.*?</title>', '<title>'+case_title+'</title>', case_
 for kind, attr, value in [('name','description',case_description),('name','twitter:title',case_title),('name','twitter:description',case_description),('property','og:title',case_title),('property','og:description',case_description),('property','og:url',case_url)]:
     case_head=re.sub(r'(<meta '+kind+'="'+attr+r'" content=")[^"]*(">)',lambda m:m[1]+escape(value,quote=True)+m[2],case_head)
 case_head=re.sub(r'<link rel="canonical" href="[^"]+">','<link rel="canonical" href="'+case_url+'">',case_head)
-case_graph=[item for item in home_graph if item['@type'] in ('Organization','WebSite','Person')]
+case_graph=[item for item in home_graph if any(has_schema_type(item, kind) for kind in ('Organization','WebSite','Person'))]
 case_graph.extend([
     {'@type':'WebPage','@id':case_url+'#webpage','url':case_url,'name':case_title,'description':case_description,'inLanguage':'pt-BR','isPartOf':{'@id':BASE+'#website'},'breadcrumb':{'@id':case_url+'#breadcrumb'},'mainEntity':{'@id':case_url+'#project'}},
     {'@type':'CreativeWork','@id':case_url+'#project','name':'Giftz 3D Studio — catálogo comercial','description':'Apresentação de linhas de colecionáveis, galeria, processo de encomenda e contato.','url':'https://giftz3dstudio.com.br/','creator':{'@id':BASE+'#organization'},'image':BASE+'assets/portfolio/giftz.png'},
@@ -244,7 +248,7 @@ ll_head = re.sub(r'<title>.*?</title>', '<title>'+ll_title+'</title>', ll_head)
 for kind, attr, value in [('name','description',ll_description),('name','twitter:title',ll_title),('name','twitter:description',ll_description),('property','og:title',ll_title),('property','og:description',ll_description),('property','og:url',ll_url),('property','og:image',BASE+'assets/portfolio/ll-parabrisas-fachada.webp'),('name','twitter:image',BASE+'assets/portfolio/ll-parabrisas-fachada.webp'),('property','og:image:alt','Fachada da LL Para-brisas em Recife'),('name','twitter:image:alt','Fachada da LL Para-brisas em Recife')]:
     ll_head=re.sub(r'(<meta '+kind+'="'+attr+r'" content=")[^"]*(">)',lambda m:m[1]+escape(value,quote=True)+m[2],ll_head)
 ll_head=re.sub(r'<link rel="canonical" href="[^"]+">','<link rel="canonical" href="'+ll_url+'">',ll_head)
-ll_graph=[item for item in home_graph if item['@type'] in ('Organization','WebSite','Person')]
+ll_graph=[item for item in home_graph if any(has_schema_type(item, kind) for kind in ('Organization','WebSite','Person'))]
 ll_graph.extend([
     {'@type':'WebPage','@id':ll_url+'#webpage','url':ll_url,'name':ll_title,'description':ll_description,'inLanguage':'pt-BR','isPartOf':{'@id':BASE+'#website'},'breadcrumb':{'@id':ll_url+'#breadcrumb'},'mainEntity':{'@id':ll_url+'#project'}},
     {'@type':'CreativeWork','@id':ll_url+'#project','name':'LL Para-brisas — site empresarial','description':'Site de serviços automotivos em Recife com categorias de veículos, dúvidas frequentes, localização e contato pelo WhatsApp.','url':'https://www.llparabrisas.com.br/','creator':{'@id':BASE+'#organization'},'image':BASE+'assets/portfolio/ll-parabrisas-fachada.webp'},

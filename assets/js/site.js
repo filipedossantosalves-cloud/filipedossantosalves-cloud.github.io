@@ -55,6 +55,17 @@
         link.href = `https://wa.me/${VIENA_CONFIG.whatsappNumber}?text=${encodeURIComponent(message)}`;
         link.target = '_blank';
         link.rel = 'noopener noreferrer';
+        link.addEventListener('click', () => {
+          const section = link.closest('section[id]')?.id || 'navegacao';
+          const eventData = {
+            event_category: 'contato',
+            event_label: link.textContent.trim().replace(/\s+/g, ' '),
+            section_origin: section,
+            destination: 'whatsapp'
+          };
+          if (typeof window.gtag === 'function') window.gtag('event', 'whatsapp_click', eventData);
+          else if (Array.isArray(window.dataLayer)) window.dataLayer.push({ event: 'whatsapp_click', ...eventData });
+        });
       });
 
       if ('IntersectionObserver' in window) {

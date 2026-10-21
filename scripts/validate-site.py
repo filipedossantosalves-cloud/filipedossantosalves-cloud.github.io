@@ -71,6 +71,12 @@ for path,page in pages.items():
     faq+=len(page.select('details'))
     print(path.relative_to(DIST), 'OK')
 
+home_schema=json.loads(re.search(r'<script type="application/ld\+json">(.*?)</script>', (DIST/'index.html').read_text(encoding='utf-8'), re.S).group(1))
+assert any('ProfessionalService' in item.get('@type', []) for item in home_schema['@graph'])
+assert any(item['@type']=='FAQPage' for item in home_schema['@graph'])
+site_js=(DIST/'assets/js/site.js').read_text(encoding='utf-8')
+assert "whatsapp_click" in site_js and "section_origin" in site_js
+
 robot=RobotFileParser();robot.parse((DIST/'robots.txt').read_text(encoding='utf-8').splitlines())
 assert robot.site_maps()==[ORIGIN+'/sitemap.xml']
 ns={'s':'http://www.sitemaps.org/schemas/sitemap/0.9'}

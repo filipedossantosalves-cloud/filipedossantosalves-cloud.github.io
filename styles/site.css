@@ -441,10 +441,10 @@
     }
     /* Readable type and touch targets preserve the editorial layout on smaller screens. */
     .hero-lead, .section-heading > p, .pillar-description, .method-heading p,
-    .contact-copy, .faq-intro > p:not(.eyebrow), .about-copy > p:not(.eyebrow) { font-size: 15px; }
+    .contact-copy, .faq-intro > p:not(.eyebrow), .about-copy > p:not(.eyebrow) { font-size: 16px; }
     .portfolio-copy > p, .timeline p, .bento-card p, .offer-description,
-    .scope-panel p, .detail-card p, .faq-item p, .portfolio-next p { font-size: 14px; }
-    .feature-list li, .offer-list li, .case-details dd { font-size: 13px; }
+    .scope-panel p, .detail-card p, .faq-item p, .portfolio-next p { font-size: 16px; }
+    .feature-list li, .offer-list li, .case-details dd { font-size: 16px; }
     .hero-note, .offer-caption, .offer-terms, .contact-caption, .service-price-caption,
     .portfolio-status, .footer-description, .footer-contact, .footer-bottom { font-size: 12px; }
     .nav-link { font-size: 11px; }
