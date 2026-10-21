@@ -8,7 +8,7 @@ import json, re, subprocess
 
 ROOT = Path(__file__).resolve().parents[1]
 DIST = ROOT
-ORIGIN = 'https://filipedossantosalves-cloud.github.io'
+ORIGIN = 'https://vienastudio.com.br'
 VOID = {'area','base','br','col','embed','hr','img','input','link','meta','param','source','track','wbr'}
 
 class Page(HTMLParser):

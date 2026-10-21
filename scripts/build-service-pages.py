@@ -11,7 +11,7 @@ import re
 
 ROOT = Path(__file__).resolve().parents[1]
 DIST = ROOT
-BASE = 'https://filipedossantosalves-cloud.github.io/'
+BASE = 'https://vienastudio.com.br/'
 PHONE = '558192788355'
 HOME = (DIST / 'index.html').read_text(encoding='utf-8')
 TESTIMONIAL = json.loads((ROOT / 'content/giftz-testimonial.json').read_text(encoding='utf-8'))
