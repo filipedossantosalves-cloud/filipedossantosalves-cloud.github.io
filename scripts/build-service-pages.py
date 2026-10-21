@@ -57,14 +57,14 @@ SERVICES = [
         'limits_title': 'Condições antes de começar',
         'limits': [
             'Hospedagem e renovação do domínio são despesas separadas. Domínios premium, novas seções, novas funções, loja virtual, área de login e campanhas de anúncios não fazem parte do pacote.',
-            'Você fornece textos, fotos, identidade visual e informações reais da empresa. A proposta confirma o prazo estimado [PREENCHER: prazo], a forma de pagamento [PREENCHER: forma de pagamento], o número de revisões [PREENCHER: número de revisões], domínio e eventuais custos recorrentes antes da contratação. O prazo depende do envio dos materiais pelo cliente.',
+            'Você fornece textos, fotos, identidade visual e informações reais da empresa. A proposta confirma o prazo estimado [PREENCHER: prazo], domínio e eventuais custos recorrentes antes da contratação. O pagamento pode ser feito por Pix ou cartão, com até 3 revisões. O prazo depende do envio dos materiais pelo cliente.',
         ],
         'faq': [
             ('Qual a diferença entre landing page e site institucional?', 'A landing page concentra uma oferta em uma página. Um site institucional organiza informações mais amplas sobre a empresa e seus serviços, podendo usar várias páginas. Se você precisa apresentar muitas áreas de atuação, o institucional pode ser mais adequado.'),
             ('O preço de R$ 997 é para o site inteiro?', 'Sim, para o projeto de uma landing page dentro do escopo de até 6 seções descrito nesta página. Hospedagem, renovação do domínio e serviços adicionais são separados. Não se trata de um preço para um site com várias páginas ou um sistema.'),
             ('Como funcionam os 6 meses de pequenos ajustes?', 'São alterações de textos e substituições de imagens na estrutura entregue, durante os 6 meses seguintes à publicação. Redesenho, novas seções, integrações e funcionalidades recebem orçamento próprio.'),
             ('Posso usar meu domínio atual?', 'Sim. Avaliamos a configuração do domínio existente e o destino da publicação. Você mantém o acesso à sua conta. O uso de um endereço já registrado e suas renovações são alinhados na proposta.'),
-            ('Em quanto tempo a página fica pronta?', 'A estimativa é [PREENCHER: prazo] e depende do envio de textos, fotos, identidade visual e demais materiais pelo cliente. A forma de pagamento [PREENCHER: forma de pagamento] e o número de revisões [PREENCHER: número de revisões] são confirmados antes do início.'),
+            ('Em quanto tempo a página fica pronta?', 'A estimativa é [PREENCHER: prazo] e depende do envio de textos, fotos, identidade visual e demais materiais pelo cliente. O pagamento pode ser feito por Pix ou cartão, com até 3 revisões incluídas.'),
             ('A landing page já inclui tráfego pago?', 'Não. A gestão de anúncios é um serviço separado, assim como a verba destinada ao Google ou à Meta. Podemos planejar a página para uma campanha e apresentar a proposta de gestão em conjunto.'),
         ],
         'closing': 'Sua oferta merece uma apresentação clara.',
