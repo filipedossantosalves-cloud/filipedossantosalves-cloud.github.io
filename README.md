@@ -1,6 +1,6 @@
 # Viena Studio — Design & Presença Digital
 
-Site público: https://filipedossantosalves-cloud.github.io/
+Domínio canônico: https://www.vienastudio.com.br/
 
 Versão estática completa, em português, com HTML, Tailwind CSS compilado, fontes locais e JavaScript sem dependências no navegador. O GitHub Pages publica a raiz da branch `main`. O arquivo `.nojekyll` mantém os arquivos estáticos sem processamento de Jekyll.
 
@@ -11,7 +11,7 @@ Versão estática completa, em português, com HTML, Tailwind CSS compilado, fon
 - Dois projetos reais: Giftz 3D Studio e LL Para-brisas, com páginas próprias e links para os sites publicados.
 - Quatro modelos demonstrativos preservados, identificados como modelos.
 - Depoimento autorizado da Giftz, com mensagem original, data e atribuição.
-- Robots, sitemap, metadados e dados estruturados apontando para o endereço público do GitHub Pages.
+- Robots, sitemap, metadados e dados estruturados apontando para o domínio canônico.
 
 ## Desenvolvimento
 
@@ -23,7 +23,7 @@ Os arquivos publicados ficam na raiz. A pasta `assets/` inclui todas as imagens 
 
 ## Publicação e validação
 
-Configuração do GitHub Pages: Deploy from a branch → `main` → `/(root)`. A publicação depende do sucesso do job Pages; o envio do commit sozinho não comprova que o endereço público foi atualizado.
+O repositório mantém um `CNAME` para compatibilidade com GitHub Pages; a hospedagem atual usa Cloudflare. Leia [DOMINIO-E-REDIRECIONAMENTOS.md](DOMINIO-E-REDIRECIONAMENTOS.md) antes de trocar a hospedagem ou configurar redirecionamentos. O envio do commit sozinho não comprova que o endereço público foi atualizado.
 
 O código foi preparado a partir do commit `de23f7f2dd4c43a43f9b4f5e2d22b6f252e130d9` da versão Viena no Sites. Esta publicação não altera o acesso da cópia mantida no Sites. Não há credenciais ou chaves de API neste pacote.
 
