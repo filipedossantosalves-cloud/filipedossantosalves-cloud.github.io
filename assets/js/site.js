@@ -48,7 +48,7 @@
           button.textContent = exploring ? 'Voltar ao início' : 'Explorar prévia';
         });
       });
-      document.querySelectorAll('[data-whatsapp]').forEach(link => {
+      document.querySelectorAll('[data-whatsapp], a[href*="wa.me/"]').forEach(link => {
         const message = link.dataset.service
           ? `Olá! Quero conversar com a Viena Studio sobre ${link.dataset.service}.`
           : VIENA_CONFIG.whatsappMessage;

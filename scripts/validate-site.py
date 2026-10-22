@@ -35,6 +35,7 @@ for path,page in pages.items():
     assert len(page.ids)==len(set(page.ids)),(path,'duplicate IDs')
     assert len(page.select('h1'))==1,(path,'H1')
     assert page.select('html')[0]['lang']=='pt-BR'
+    assert page.source.count('https://www.googletagmanager.com/gtag/js?id=G-DPL2LKCK9Z')==1,(path,'Google Analytics tag')
     assert page.select('main')[0].get('tabindex')=='-1'
     title=re.search(r'<title>(.*?)</title>',page.source).group(1)
     description=page.select('meta',name='description')[0]['content']
@@ -50,7 +51,9 @@ for path,page in pages.items():
     assert 'href="../#portfolio"' not in page.source, (path, 'portfolio must link to its dedicated page')
     for tag,attrs in page.elements:
         if tag=='script' and attrs.get('src'):
-            assert not urlsplit(attrs['src']).scheme,(path,'third-party runtime')
+            script_src=attrs['src']
+            allowed_analytics='https://www.googletagmanager.com/gtag/js?id=G-DPL2LKCK9Z'
+            assert not urlsplit(script_src).scheme or script_src==allowed_analytics,(path,'unexpected third-party runtime')
         if tag=='img': assert all(key in attrs for key in ('width','height','alt','loading'))
         if 'data-whatsapp' in attrs:
             assert attrs.get('href','').startswith('https://wa.me/558192788355?text=')
