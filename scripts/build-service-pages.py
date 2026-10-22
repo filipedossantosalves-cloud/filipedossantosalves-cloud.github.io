@@ -15,7 +15,7 @@ BASE = 'https://www.vienastudio.com.br/'
 PHONE = '558192788355'
 HOME = (DIST / 'index.html').read_text(encoding='utf-8')
 TESTIMONIAL = json.loads((ROOT / 'content/giftz-testimonial.json').read_text(encoding='utf-8'))
-LL_TESTIMONIAL_DEMO = json.loads((ROOT / 'content/ll-testimonial-demo.json').read_text(encoding='utf-8'))
+LL_TESTIMONIAL = json.loads((ROOT / 'content/ll-testimonial.json').read_text(encoding='utf-8'))
 
 def icon(name='arrow-up-right'):
     return f'<svg class="icon" aria-hidden="true"><use href="#{name}"/></svg>'
@@ -27,14 +27,16 @@ def testimonial_html(t=TESTIMONIAL, prefix='', compact=False):
     cite = f' cite="{prefix + t["sourceImage"]}"' if t.get('sourceImage') else ''
     if t.get('notice'):
         meta = f'<span>{escape(t["notice"])}</span>'
-    else:
+    elif t.get('date'):
         meta = f'<span>Trecho de mensagem pelo {escape(t["channel"])}<br><time datetime="{t["date"]}">{escape(t["dateLabel"])}</time></span>'
+    else:
+        meta = '<span>Depoimento enviado pelo cliente.</span>'
     return f'''<figure class="testimonial{compact_class}">
       <figcaption class="testimonial-context"><p class="eyebrow label">{escape(eyebrow)}</p><p class="testimonial-company">{escape(t['company'])}</p><p class="testimonial-meta"><strong>{escape(t['attribution'])}</strong>{meta}</p><a class="text-link" href="{project_url}">Conhecer o projeto {icon()}</a></figcaption>
       <div class="testimonial-content"><span class="testimonial-mark" aria-hidden="true">“</span><blockquote{cite}><p>“{escape(t['quote'])}”</p></blockquote></div>
     </figure>'''
 
-HOME = re.sub(r'<!-- testimonial:giftz:start -->.*?<!-- testimonial:giftz:end -->', lambda m:'<!-- testimonial:giftz:start -->\n'+testimonial_html(compact=True)+'\n'+testimonial_html(LL_TESTIMONIAL_DEMO, compact=True)+'\n        <!-- testimonial:giftz:end -->', HOME, flags=re.S)
+HOME = re.sub(r'<!-- testimonial:giftz:start -->.*?<!-- testimonial:giftz:end -->', lambda m:'<!-- testimonial:giftz:start -->\n'+testimonial_html(compact=True)+'\n'+testimonial_html(LL_TESTIMONIAL, compact=True)+'\n        <!-- testimonial:giftz:end -->', HOME, flags=re.S)
 (DIST / 'index.html').write_text(HOME, encoding='utf-8')
 
 SERVICES = [
@@ -62,14 +64,14 @@ SERVICES = [
         'limits_title': 'Condições antes de começar',
         'limits': [
             'Hospedagem e renovação do domínio são despesas separadas. Domínios premium, novas seções, novas funções, loja virtual, área de login e campanhas de anúncios não fazem parte do pacote.',
-            'Você fornece textos, fotos, identidade visual e informações reais da empresa. A proposta confirma o prazo estimado [PREENCHER: prazo], domínio e eventuais custos recorrentes antes da contratação. O valor de R$ 997 é exclusivo para pagamento à vista via Pix e inclui até 3 revisões. O prazo depende do envio dos materiais pelo cliente.',
+            'Você fornece textos, fotos, identidade visual e informações reais da empresa. A landing page é entregue em até 7 dias úteis após o envio dos materiais pelo cliente. A proposta confirma domínio e eventuais custos recorrentes antes da contratação. O valor de R$ 997 é exclusivo para pagamento à vista via Pix e inclui até 3 revisões.',
         ],
         'faq': [
             ('Qual a diferença entre landing page e site institucional?', 'A landing page concentra uma oferta em uma página. Um site institucional organiza informações mais amplas sobre a empresa e seus serviços, podendo usar várias páginas. Se você precisa apresentar muitas áreas de atuação, o institucional pode ser mais adequado.'),
             ('O preço de R$ 997 é para o site inteiro?', 'Sim, para o projeto de uma landing page dentro do escopo de até 6 seções descrito nesta página. Hospedagem, renovação do domínio e serviços adicionais são separados. Não se trata de um preço para um site com várias páginas ou um sistema.'),
             ('Como funcionam os 6 meses de pequenos ajustes?', 'São alterações de textos e substituições de imagens na estrutura entregue, durante os 6 meses seguintes à publicação. Redesenho, novas seções, integrações e funcionalidades recebem orçamento próprio.'),
             ('Posso usar meu domínio atual?', 'Sim. Avaliamos a configuração do domínio existente e o destino da publicação. Você mantém o acesso à sua conta. O uso de um endereço já registrado e suas renovações são alinhados na proposta.'),
-            ('Em quanto tempo a página fica pronta?', 'A estimativa é [PREENCHER: prazo] e depende do envio de textos, fotos, identidade visual e demais materiais pelo cliente. O valor de R$ 997 é exclusivo para pagamento à vista via Pix e inclui até 3 revisões.'),
+            ('Em quanto tempo a página fica pronta?', 'A landing page é entregue em até 7 dias úteis após o envio de textos, fotos, identidade visual e demais materiais pelo cliente. O valor de R$ 997 é exclusivo para pagamento à vista via Pix e inclui até 3 revisões.'),
             ('A landing page já inclui tráfego pago?', 'Não. A gestão de anúncios é um serviço separado, assim como a verba destinada ao Google ou à Meta. Podemos planejar a página para uma campanha e apresentar a proposta de gestão em conjunto.'),
         ],
         'closing': 'Sua oferta merece uma apresentação clara.',
