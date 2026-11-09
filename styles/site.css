@@ -16,6 +16,8 @@
     *, *::before, *::after { box-sizing: border-box; }
     html { scroll-behavior: smooth; scroll-padding-top: calc(var(--header-height) + 24px); }
     body { margin: 0; background: var(--imperial); color: var(--marfim); font-family: 'Plus Jakarta Sans', Arial, sans-serif; font-size: 16px; line-height: 1.75; -webkit-font-smoothing: antialiased; }
+    /* Tema temporário da campanha Black Friday: conserva a estrutura e a legibilidade da marca. */
+    .black-friday { --imperial: #0b0b0d; --profundo: #171013; --ouro: #dc3b42; --luz: #ff7b80; --salvia: #ded5d6; --metal: linear-gradient(135deg,#ff767c 0%,#dc3b42 48%,#941f2b 100%); --line: rgba(255,123,128,.28); }
     h1, h2, h3, p { margin: 0; }
     a { color: inherit; text-decoration: none; }
     button { font: inherit; cursor: pointer; }
@@ -106,6 +108,7 @@
     .pillar-number { font-size: 19px; line-height: 1; color: var(--ouro); }
     .pillar-visual { height: 204px; padding: 24px 27px 0; overflow: hidden; position: relative; display: flex; justify-content: center; align-items: flex-end; }
     .pillar-visual img { width: 100%; height: 100%; object-fit: contain; object-position: center; background: var(--imperial); border: 1px solid rgba(197,160,89,.45); border-bottom: 0; border-radius: 4px 4px 0 0; }
+    .pillar-visual-site img { object-fit: cover; object-position: center top; }
     .browser-art { width: 100%; max-width: 350px; border: 1px solid rgba(197,160,89,.45); border-bottom: 0; border-radius: 4px 4px 0 0; background: var(--imperial); transform: translateY(8px); transition: transform .5s; }
     .pillar:hover .browser-art { transform: translateY(2px); }
     .browser-bar { height: 25px; display: flex; align-items: center; padding: 0 10px; gap: 4px; border-bottom: 1px solid var(--line); }
@@ -270,6 +273,7 @@
     @media (min-width: 900px) {
       :root { --header-height: 92px; }
       .hero { padding-top: calc(var(--header-height) + 87px); }
+      .black-friday .hero { padding-top: 87px; }
       .hero-content { padding-inline: 20px; }
       .hero h1 { font-size: 48px; line-height: 1.38; letter-spacing: .08em; }
       .hero-badge { font-size: 10px; margin-bottom: 28px; }
@@ -340,6 +344,16 @@
     .quick-start-card b { align-self: end; color: #967330; font: 600 10px/1.4 'Montserrat',Arial,sans-serif; letter-spacing: .1em; text-transform: uppercase; }
     .quick-start-card b span { margin-left: 5px; font-size: 15px; }
     .quick-start-price { background: linear-gradient(135deg,rgba(197,160,89,.2),rgba(255,255,255,.72)); border-color: rgba(158,123,59,.62); }
+    .black-friday-strip { position: relative; z-index: 4; margin-top: var(--header-height); background: #dc3b42; color: #fff7f3; border-bottom: 1px solid rgba(255,255,255,.35); }
+    .black-friday-strip .shell { display: flex; align-items: center; justify-content: center; flex-wrap: wrap; gap: 8px 16px; min-height: 48px; padding-block: 8px; text-align: center; }
+    .black-friday-strip .label { color: #fff; font-weight: 700; }
+    .black-friday-strip p:not(.label) { font-size: 12px; }
+    .black-friday-strip a { display: inline-flex; align-items: center; gap: 6px; min-height: 36px; font-size: 11px; font-weight: 700; text-transform: uppercase; letter-spacing: .06em; }
+    .black-friday-strip .icon { width: 15px; height: 15px; }
+    .black-friday .hero::before { background: radial-gradient(ellipse at 50% 38%, rgba(220,59,66,.2), transparent 62%); }
+    .black-friday .hero { padding-top: 76px; }
+    .black-friday .quick-start-price { background: linear-gradient(135deg,rgba(220,59,66,.2),rgba(255,255,255,.8)); border-color: rgba(220,59,66,.62); }
+    .black-friday .quick-start-card b, .black-friday .quick-start-card strong small { color: #a82530; }
     .portfolio-page-header .header-inner { display: flex; justify-content: space-between; }
     .portfolio-page-header .header-cta { width: auto; }
     .portfolio-teaser { background: var(--profundo); }

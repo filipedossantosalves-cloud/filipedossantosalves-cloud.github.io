@@ -44,11 +44,11 @@ SERVICES = [
         'path': 'criacao-de-sites-recife', 'key': 'sites', 'name': 'Landing pages',
         'title': 'Landing Page por R$ 997 em Recife | Viena Studio',
         'description': 'Criação de landing page por R$ 997: até 6 seções, design responsivo, WhatsApp e SEO básico. Confira o escopo. Viena Studio, Recife e atendimento online.',
-        'badge': 'Criação de sites em Recife · Atendimento online',
+        'badge': 'Black Friday · Criação de sites em Recife · Atendimento online',
         'heading': 'Uma página para sua oferta. <span class="hero-emphasis">Um caminho claro até o contato.</span>',
         'lead': 'A landing page reúne o essencial sobre um serviço, produto ou campanha em uma única página. Na Viena Studio, ela é desenhada para apresentar sua proposta, esclarecer dúvidas e facilitar o pedido de orçamento pelo WhatsApp.',
-        'price': 'R$ 997', 'caption': 'Projeto de uma página · Até 6 seções · Confira as condições abaixo',
-        'cta': 'Quero a landing page de R$ 997', 'message': 'a landing page de R$ 997 para minha empresa',
+        'price': 'R$ 997', 'caption': 'Black Friday · Em até 10x de R$ 99,70 sem juros · Até 6 seções',
+        'cta': 'Quero a oferta Black Friday de R$ 997', 'message': 'a oferta Black Friday da landing page de R$ 997 para minha empresa',
         'section_title': 'O essencial, bem resolvido.',
         'section_lead': 'Indicada para profissionais, empresas de serviços e campanhas com uma oferta principal. Cada seção tem uma função na apresentação do negócio.',
         'cards': [
@@ -64,14 +64,14 @@ SERVICES = [
         'limits_title': 'Condições antes de começar',
         'limits': [
             'Hospedagem e renovação do domínio são despesas separadas. Domínios premium, novas seções, novas funções, loja virtual, área de login e campanhas de anúncios não fazem parte do pacote.',
-            'Você fornece textos, fotos, identidade visual e informações reais da empresa. A landing page é entregue em até 7 dias úteis após o envio dos materiais pelo cliente. A proposta confirma domínio e eventuais custos recorrentes antes da contratação. O valor de R$ 997 é exclusivo para pagamento à vista via Pix e inclui até 3 revisões.',
+            'Você fornece textos, fotos, identidade visual e informações reais da empresa. A landing page é entregue em até 7 dias úteis após o envio dos materiais pelo cliente. A proposta confirma domínio e eventuais custos recorrentes antes da contratação. Na oferta Black Friday, o valor é R$ 997 à vista via Pix ou em até 10x de R$ 99,70 sem juros no cartão, com até 3 revisões.',
         ],
         'faq': [
             ('Qual a diferença entre landing page e site institucional?', 'A landing page concentra uma oferta em uma página. Um site institucional organiza informações mais amplas sobre a empresa e seus serviços, podendo usar várias páginas. Se você precisa apresentar muitas áreas de atuação, o institucional pode ser mais adequado.'),
             ('O preço de R$ 997 é para o site inteiro?', 'Sim, para o projeto de uma landing page dentro do escopo de até 6 seções descrito nesta página. Hospedagem, renovação do domínio e serviços adicionais são separados. Não se trata de um preço para um site com várias páginas ou um sistema.'),
             ('Como funcionam os 6 meses de pequenos ajustes?', 'São alterações de textos e substituições de imagens na estrutura entregue, durante os 6 meses seguintes à publicação. Redesenho, novas seções, integrações e funcionalidades recebem orçamento próprio.'),
             ('Posso usar meu domínio atual?', 'Sim. Avaliamos a configuração do domínio existente e o destino da publicação. Você mantém o acesso à sua conta. O uso de um endereço já registrado e suas renovações são alinhados na proposta.'),
-            ('Em quanto tempo a página fica pronta?', 'A landing page é entregue em até 7 dias úteis após o envio de textos, fotos, identidade visual e demais materiais pelo cliente. O valor de R$ 997 é exclusivo para pagamento à vista via Pix e inclui até 3 revisões.'),
+            ('Em quanto tempo a página fica pronta?', 'A landing page é entregue em até 7 dias úteis após o envio de textos, fotos, identidade visual e demais materiais pelo cliente. Na oferta Black Friday, o valor é R$ 997 à vista via Pix ou em até 10x de R$ 99,70 sem juros no cartão, com até 3 revisões.'),
             ('A landing page já inclui tráfego pago?', 'Não. A gestão de anúncios é um serviço separado, assim como a verba destinada ao Google ou à Meta. Podemos planejar a página para uma campanha e apresentar a proposta de gestão em conjunto.'),
         ],
         'closing': 'Sua oferta merece uma apresentação clara.',
@@ -160,12 +160,16 @@ def contact(data, label=None):
 def shared_links(html):
     html = re.sub(r'(<a\b[^>]*?href=")#([^\"]*)"', r'\1../#\2"', html)
     html = html.replace('href="portfolio/"', 'href="../portfolio/"')
+    html = html.replace('href="privacidade/"', 'href="../privacidade/"')
     for data in SERVICES:
         html = html.replace(f'href="{data["path"]}/"', f'href="../{data["path"]}/"')
     return html
 
 head = HOME[:HOME.index('</head>')]
-symbols_and_header = HOME[HOME.index('<body>'):HOME.index('  <main id="conteudo"')]
+body_opening = re.search(r'<body(?:\s[^>]*)?>', HOME)
+if not body_opening:
+    raise ValueError('A página inicial não possui uma tag <body> válida.')
+symbols_and_header = HOME[body_opening.start():HOME.index('  <main id="conteudo"')]
 symbols_and_header = shared_links(symbols_and_header).replace('href="../#conteudo"','href="#conteudo"')
 symbols_and_header = symbols_and_header.replace('      <a href="https://wa.me/', '      <a class="button button-secondary header-home" href="../#inicio">Página inicial</a>\n      <a href="https://wa.me/', 1)
 footer = shared_links(HOME[HOME.index('  <footer class="site-footer">'):])
@@ -300,7 +304,7 @@ ll_main=f'''
 '''
 (DIST/ll_path).mkdir(exist_ok=True)
 (DIST/ll_path/'index.html').write_text(ll_head+'</head>\n'+symbols_and_header+ll_main+footer, encoding='utf-8')
-urls = [BASE, BASE+'portfolio/'] + [BASE+s['path']+'/' for s in SERVICES] + [case_url,ll_url]
+urls = [BASE, BASE+'portfolio/', BASE+'privacidade/'] + [BASE+s['path']+'/' for s in SERVICES] + [case_url,ll_url]
 (DIST/'sitemap.xml').write_text('<?xml version="1.0" encoding="UTF-8"?>\n<urlset xmlns="http://www.sitemaps.org/schemas/sitemap/0.9">\n'+''.join(f'  <url><loc>{url}</loc><lastmod>2026-10-15</lastmod></url>\n' for url in urls)+'</urlset>\n', encoding='utf-8')
 (DIST/'robots.txt').write_text('User-agent: *\nAllow: /\n\nSitemap: '+BASE+'sitemap.xml\n', encoding='utf-8')
 print(f'Generated {len(SERVICES)} service pages, Giftz and LL Para-brisas projects, robots.txt and sitemap.')
